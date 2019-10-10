@@ -8,7 +8,7 @@ module.exports = merge(base, {
   mode: 'development',
   devtool: 'cheap-module-source-map',
   output: {
-    filename: 'static/js/main.js',
+    filename: 'static/js/index.js',
     chunkFilename: 'static/js/[name].chunk.js',
     path: path.resolve(__dirname, 'dist'),
   },
