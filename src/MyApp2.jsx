@@ -27,8 +27,20 @@ class MyApp2 extends React.Component {
                 <input type="number" onChange={this.ShowNumberA} value={this.state.a}></input>
                 <input type="number" onChange={this.ShowNumberB} value={this.state.b}></input>
             </div>
+            <div>
+                <p>Generated Array:</p>
+                {generateArray(this.state.a,this.state.b)}
+            </div>
         </body>
         )
+    }
+}
+
+const generateArray = (a,b)=>{
+    if(Number(a)<0 || Number(a)>Number(b))
+        return "Incorrect inputs, try again!!!"
+    else{
+        return Array.from(Array(b-a+1), (_,x) => x+Number(a)).toString();
     }
 }
 
