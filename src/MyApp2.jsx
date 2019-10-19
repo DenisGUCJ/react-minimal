@@ -7,7 +7,8 @@ class MyApp2 extends React.Component {
         super();
         this.state={
             a:0,
-            b:0
+            b:0,
+            arr:[]
         };
     }
     ShowNumberA=(event)=>{
@@ -24,6 +25,12 @@ class MyApp2 extends React.Component {
         });
        console.log("B value is :",event.target.value);
     }
+    ProcessArray=()=>{
+        count++;
+        this.setState({
+            arr:generateArray(this.state.a,this.state.b).map(x=>(Math.sqrt(x).toFixed(3)))
+        });
+      }
     render(){
         return(
         <body>
@@ -35,7 +42,11 @@ class MyApp2 extends React.Component {
             </div>
             <div>
                 <p>Generated Array:</p>
-                {generateArray(this.state.a,this.state.b)}
+                {generateArray(this.state.a,this.state.b).toString()}
+            </div>
+            <div>   
+                <button onClick={this.ProcessArray}>Procces Array</button>
+                <p>{this.state.arr.toString()}</p>
             </div>
             {console.timeEnd("render "+count)}
         </body>
@@ -47,8 +58,9 @@ const generateArray = (a,b)=>{
     if(Number(a)<0 || Number(a)>Number(b))
         return "Incorrect inputs, try again!!!"
     else{
-        return Array.from(Array(b-a+1), (_,x) => x+Number(a)).toString();
+        return Array.from(Array(b-a+1), (_,x) => x+Number(a));
     }
 }
+
 
 export default MyApp2
