@@ -1,4 +1,7 @@
 import React from 'react'
+
+let count=0;
+
 class MyApp2 extends React.Component {
     constructor(){
         super();
@@ -8,12 +11,14 @@ class MyApp2 extends React.Component {
         };
     }
     ShowNumberA=(event)=>{
+        count++;
         this.setState({
             a:event.target.value
         });
         console.log("A value is :",event.target.value);
     }
     ShowNumberB=(event)=>{
+        count++;
         this.setState({
             b:event.target.value,
         });
@@ -22,6 +27,7 @@ class MyApp2 extends React.Component {
     render(){
         return(
         <body>
+            {console.time("render "+count)}
             <h1>Lab2</h1>
             <div>
                 <input type="number" onChange={this.ShowNumberA} value={this.state.a}></input>
@@ -31,6 +37,7 @@ class MyApp2 extends React.Component {
                 <p>Generated Array:</p>
                 {generateArray(this.state.a,this.state.b)}
             </div>
+            {console.timeEnd("render "+count)}
         </body>
         )
     }
