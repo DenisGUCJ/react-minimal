@@ -8,9 +8,10 @@ class MyApp2 extends React.Component {
         this.state={
             a:0,
             b:0,
-            arr:[]
+            arr:"No generation was occurred yet"
         };
     }
+
     ShowNumberA=(event)=>{
         count++;
         this.setState({
@@ -18,6 +19,7 @@ class MyApp2 extends React.Component {
         });
         console.log("A value is :",event.target.value);
     }
+
     ShowNumberB=(event)=>{
         count++;
         this.setState({
@@ -25,42 +27,49 @@ class MyApp2 extends React.Component {
         });
        console.log("B value is :",event.target.value);
     }
+
     ProcessArray=()=>{
         count++;
         this.setState({
-            arr:generateArray(this.state.a,this.state.b).map(x=>(Math.sqrt(x).toFixed(3)))
+            arr:this.generateArray(this.state.a,this.state.b).map(x=>(Math.sqrt(x).toFixed(3)))
         });
       }
+
+    generateArray = (a,b)=>{
+        if(Number(a)<0 || Number(a)>Number(b)){
+            return "Incorrect inputs, try again!!!"
+        }
+        else{
+            return Array.from(Array(b-a+1), (_,x) => x+Number(a));
+        }
+    }
+
     render(){
         return(
-        <body>
+        <div>
             {console.time("render "+count)}
             <h1>Lab2</h1>
+            <h2>The code generates array in range [a,b] in real time</h2>
             <div>
+                <p>Input value for "a" : </p>
                 <input type="number" onChange={this.ShowNumberA} value={this.state.a}></input>
+                <p>Input value for "b" : </p>
                 <input type="number" onChange={this.ShowNumberB} value={this.state.b}></input>
             </div>
             <div>
                 <p>Generated Array:</p>
-                {generateArray(this.state.a,this.state.b).toString()}
+                {this.generateArray(this.state.a,this.state.b).toString()}
             </div>
-            <div>   
+            <div>
+                <h2>The button below processes the generated array by computing sqr of each element</h2>   
                 <button onClick={this.ProcessArray}>Procces Array</button>
+                <p>The processed array :</p>
                 <p>{this.state.arr.toString()}</p>
             </div>
             {console.timeEnd("render "+count)}
-        </body>
-        )
+        </div>
+        ) 
     }
 }
-
-const generateArray = (a,b)=>{
-    if(Number(a)<0 || Number(a)>Number(b))
-        return "Incorrect inputs, try again!!!"
-    else{
-        return Array.from(Array(b-a+1), (_,x) => x+Number(a));
-    }
-}
-
 
 export default MyApp2
